@@ -1,8 +1,15 @@
 package com.thanhdang.approvalmatrix.ui.component.create_matrix
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.thanhdang.approvalmatrix.R
@@ -18,6 +25,8 @@ class ActivityCreateMatrix : BaseActivity<ActivityCreateMatrixBinding>() {
 //
     private lateinit var database: AppDatabase
     private var matrix: ApprovalMatrix? = null
+    private var popupWindow: PopupWindow? = null
+
 
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityCreateMatrixBinding {
         return ActivityCreateMatrixBinding.inflate(layoutInflater)
@@ -43,18 +52,33 @@ class ActivityCreateMatrix : BaseActivity<ActivityCreateMatrixBinding>() {
     }
 
     override fun initViews() {
+        setFocusChangeListener(binding.edName)
+        setFocusChangeListener(binding.edMin)
+        setFocusChangeListener(binding.edMax)
+        setFocusChangeListener(binding.edNumber)
     }
 
     override fun initData() {
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun initActions() {
+
+        binding.spType.setOnTouchListener { _, _ ->
+            val items = resources.getStringArray(R.array.spinner_values).toList()
+            showPopupWindow(binding.spType, items)
+            true
+        }
+
         binding.btnReset.setOnClickListener {
             binding.edName.text?.clear()
             binding.edMin.text?.clear()
             binding.edMax.text?.clear()
             binding.edNumber.text?.clear()
             binding.spType.setSelection(0)
+        }
+        binding.btnBack.setOnClickListener {
+            finish()
         }
 
         binding.btnSave.setOnClickListener {
@@ -64,6 +88,7 @@ class ActivityCreateMatrix : BaseActivity<ActivityCreateMatrixBinding>() {
             val numApproval = binding.edNumber.text.toString()
             val type = binding.spType.selectedItem.toString()
 
+            handlingSaveZoneAlert()
 
             if (name.isEmpty() || min.isEmpty() || max.isEmpty() || numApproval.isEmpty()) {
                 showToast(getString(R.string.error_empty))
@@ -106,6 +131,7 @@ class ActivityCreateMatrix : BaseActivity<ActivityCreateMatrixBinding>() {
             val numApproval = binding.edNumber.text.toString()
             val type = binding.spType.selectedItem.toString()
 
+            handlingSaveZoneAlert()
 
             if (name.isEmpty() || min.isEmpty() || max.isEmpty() || numApproval.isEmpty()) {
                 showToast(getString(R.string.error_empty))
@@ -123,6 +149,98 @@ class ActivityCreateMatrix : BaseActivity<ActivityCreateMatrixBinding>() {
                 finish()
             }
         }
+    }
+    private fun showPopupWindow(anchorView: View, items: List<String>) {
+        if (popupWindow != null && popupWindow!!.isShowing) {
+            popupWindow!!.dismiss()
+        }
+
+        val inflater = LayoutInflater.from(this)
+        val popupView = inflater.inflate(R.layout.popup_spinner_items, null)
+        val listView = popupView.findViewById<ListView>(R.id.listView)
+
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
+        listView.adapter = adapter
+
+        popupWindow = PopupWindow(popupView, anchorView.width, WindowManager.LayoutParams.WRAP_CONTENT, true)
+        popupWindow!!.showAsDropDown(anchorView)
+
+        listView.setOnItemClickListener { _, _, position, _ ->
+            // Handle item click
+            val selectedItem = items[position]
+            (anchorView as AppCompatSpinner).setSelection(position)
+            popupWindow!!.dismiss()
+        }
+    }
+
+    private fun setFocusChangeListener(view: View) {
+        view.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                view.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.bg_has_focus))
+            } else {
+                view.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.bg_stroke_border))
+            }
+        }
+        if (view.id == binding.edMin.id || view.id == binding.edMax.id) {
+            view.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    handelforRangeOfApproval()
+                    view.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.bg_stroke_border))
+                }
+                else{
+                    view.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.bg_has_focus))
+                }
+            }
+        }
+    }
+    private fun handelforRangeOfApproval() {
+        val minText = binding.edMin.text.toString()
+        val maxText = binding.edMax.text.toString()
+
+        if (minText.isEmpty() || maxText.isEmpty()) {
+            return
+        }
+
+        val min = minText.toLong()
+        val max = maxText.toLong()
+
+        if (min > max) {
+            binding.edMin.hint = getString(R.string.error_min_greater_than_max)
+            binding.edMax.hint = getString(R.string.error_max_less_than_min)
+            showToast(getString(R.string.error_min_greater_than_max))
+            binding.btnSave.isEnabled = false
+            binding.btnUpdate.isEnabled = false
+        }
+        else {
+            binding.btnSave.isEnabled = true
+            binding.btnUpdate.isEnabled = true
+        }
+    }
+    private fun handlingSaveZoneAlert() {
+        val hintTextColor =
+            ContextCompat.getColorStateList(this, R.color.red)
+        when {
+            binding.edName.text.toString().isEmpty() -> {
+                binding.edName.hint = getString(R.string.empty_matrix_name)
+                binding.edName.setHintTextColor(hintTextColor)
+            }
+            binding.edMin.text.toString().isEmpty() -> {
+                binding.edMin.hint = getString(R.string.empty_min)
+                binding.edMin.setHintTextColor(hintTextColor)
+            }
+            binding.edMax.text.toString().isEmpty() -> {
+                binding.edMax.hint = getString(R.string.empty_max)
+                binding.edMax.setHintTextColor(hintTextColor)
+            }
+            binding.edNumber.text.toString().isEmpty() -> {
+                binding.edNumber.hint = getString(R.string.empty_number_of_approval)
+                binding.edNumber.setHintTextColor(hintTextColor)
+            }
+            else -> {
+                binding.btnSave.isEnabled = true
+            }
+        }
+
     }
 
     private fun showToast(message: String) {
