@@ -36,5 +36,11 @@
     <string name="error_empty">Some empty value</string>
     <string name="success">Add Matrix success</string>
     <string name="error">Add Matrix faild</string>
+    <string name="delete">Delete</string>
+    <string name="empty_matrix_name">Matrix name is required</string>
+    <string name="empty_min">Minimum value is required</string>
+    <string name="empty_max">Maximum value is required</string>
+    <string name="empty_number_of_approval">Number of approval is required</string>
+
 </resources>
 
