@@ -10,30 +10,38 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.thanhdang.approvalmatrix.R
+import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
 import com.thanhdang.approvalmatrix.databinding.ActivityMainBinding
+import com.thanhdang.approvalmatrix.helper.database.AppDatabase
 import com.thanhdang.approvalmatrix.ui.base.BaseActivity
+import com.thanhdang.approvalmatrix.ui.component.create_matrix.ActivityCreateMatrix
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    private val matrixList = mutableListOf<ApprovalMatrix>()
+    private lateinit var adapter: MatrixAdapter
+    private lateinit var database: AppDatabase
+
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun initArguments() {
+        database = AppDatabase.getInstance(this)
     }
 
     override fun setup() {
+        setupRecyclerView()
+        fetchDataFromDatabase()
     }
 
     override fun initViews() {
-//        supportActionBar?.hide()
-//
-//        window.decorView.systemUiVisibility = (
-//                View.SYSTEM_UI_FLAG_FULLSCREEN
-//                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-
-
     }
 
     override fun initData() {
@@ -41,9 +49,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
     override fun initActions() {
-        binding.button.setOnClickListener {
-            val intent = Intent(this, com.thanhdang.approvalmatrix.ui.component.create_matrix.ActivityCreateMatrix::class.java)
+        binding.btnCreateMatrix.setOnClickListener {
+            val intent = Intent(this, ActivityCreateMatrix::class.java)
             startActivity(intent)
         }
     }
+    private fun setupRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun fetchDataFromDatabase() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val matrixList = database.matrixDao().getAllMatrix()
+            withContext(Dispatchers.Main) {
+                adapter = MatrixAdapter(matrixList)
+                binding.recyclerView.adapter = adapter
+            }
+        }
+    }
+
 }

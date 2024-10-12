@@ -15,13 +15,10 @@
         <activity
             android:name=".ui.component.create_matrix.ActivityCreateMatrix"
             android:exported="false"
-            android:theme="@style/Theme.ApprovalMatrix" />
-        <activity
-            android:name=".ui.component.create_matrix.FullscreenActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:exported="false"
-            android:label="@string/title_activity_fullscreen"
-            android:theme="@style/Theme.ApprovalMatrix.Fullscreen" />
+            android:theme="@style/Theme.ApprovalMatrix"
+            android:windowSoftInputMode="adjustResize"
+            />
+
         <activity
             android:name=".ui.component.main.MainActivity"
             android:exported="true">

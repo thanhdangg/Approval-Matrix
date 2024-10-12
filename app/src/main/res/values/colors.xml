@@ -92,5 +92,7 @@
     <color name="light_blue_A200">#FF40C4FF</color>
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
+    <color name="disable_light">#E5E0E0</color>
+    <color name="blue_90">#0021FF</color>
     <!--    -->
 </resources>
