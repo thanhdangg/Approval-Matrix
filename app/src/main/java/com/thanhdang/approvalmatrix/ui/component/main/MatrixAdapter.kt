@@ -9,7 +9,7 @@ import com.thanhdang.approvalmatrix.R
 import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
 
 class MatrixAdapter(
-    private val matrixList: List<ApprovalMatrix>,
+    private var matrixList: List<ApprovalMatrix>,
     private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<MatrixAdapter.MatrixViewHolder>() {
 
@@ -25,6 +25,10 @@ class MatrixAdapter(
             itemClickListener.onItemClick(matrix)
         }
     }
+    fun updateList(newList: List<ApprovalMatrix>) {
+        matrixList = newList
+        notifyDataSetChanged()
+    }
 
     override fun getItemCount(): Int = matrixList.size
 
@@ -33,10 +37,14 @@ class MatrixAdapter(
             val tvApprovalMin = itemView.findViewById<TextView>(R.id.tvApprovalMin)
             val tvApprovalMax = itemView.findViewById<TextView>(R.id.tvApprovalMax)
             val tvNumApproval = itemView.findViewById<TextView>(R.id.tvNumApproval)
+            val tvMatrixName = itemView.findViewById<TextView>(R.id.tv_approval_1)
+            val tvType = itemView.findViewById<TextView>(R.id.tv_approval_2)
 
             tvApprovalMin.text = matrix.minimumApproval.toString()
             tvApprovalMax.text = matrix.maximumApproval.toString()
             tvNumApproval.text = matrix.numberOfApproval.toString()
+            tvMatrixName.text = matrix.matrixName
+            tvType.text = matrix.matrixType
         }
     }
 }

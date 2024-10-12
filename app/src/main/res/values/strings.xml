@@ -41,6 +41,8 @@
     <string name="empty_min">Minimum value is required</string>
     <string name="empty_max">Maximum value is required</string>
     <string name="empty_number_of_approval">Number of approval is required</string>
+    <string name="error_min_greater_than_max">Minimum must be less than Maximum</string>
+    <string name="error_max_less_than_min">Maximum must be greater than Minimum</string>
 
 </resources>
 

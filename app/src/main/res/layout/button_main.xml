@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/bg_button_main"
+        android:background="@drawable/bg_button_main_uncheck"
         android:gravity="center"
         android:paddingHorizontal="8dp"
-        android:paddingVertical="@dimen/margin_16"
+        android:paddingVertical="@dimen/margin_24"
         >
 
         <TextView
@@ -23,10 +24,15 @@
             android:paddingStart="@dimen/margin_16"
             tools:ignore="RtlSymmetry" />
 
+
+
         <View
+            android:id="@+id/divider"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"/>
+            android:background="@color/default_middle"
+            />
+
 
         <TextView
             android:id="@+id/text2"
