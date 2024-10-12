@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thanhdang.approvalmatrix.R
 import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
 
-class MatrixAdapter(private val matrixList: List<ApprovalMatrix>) : RecyclerView.Adapter<MatrixAdapter.MatrixViewHolder>() {
+class MatrixAdapter(
+    private val matrixList: List<ApprovalMatrix>,
+    private val itemClickListener: OnItemClickListener
+) : RecyclerView.Adapter<MatrixAdapter.MatrixViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatrixViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_matrix, parent, false)
@@ -18,6 +21,9 @@ class MatrixAdapter(private val matrixList: List<ApprovalMatrix>) : RecyclerView
     override fun onBindViewHolder(holder: MatrixViewHolder, position: Int) {
         val matrix = matrixList[position]
         holder.bind(matrix)
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(matrix)
+        }
     }
 
     override fun getItemCount(): Int = matrixList.size

@@ -22,7 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainActivity : BaseActivity<ActivityMainBinding>() {
+class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
 
     private val matrixList = mutableListOf<ApprovalMatrix>()
     private lateinit var adapter: MatrixAdapter
@@ -62,10 +62,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         CoroutineScope(Dispatchers.IO).launch {
             val matrixList = database.matrixDao().getAllMatrix()
             withContext(Dispatchers.Main) {
-                adapter = MatrixAdapter(matrixList)
+                adapter = MatrixAdapter(matrixList, this@MainActivity)
                 binding.recyclerView.adapter = adapter
             }
         }
+    }
+    override fun onItemClick(matrix: ApprovalMatrix) {
+        val intent = Intent(this, ActivityCreateMatrix::class.java).apply {
+            putExtra("matrix", matrix)
+        }
+        startActivity(intent)
     }
 
 }
