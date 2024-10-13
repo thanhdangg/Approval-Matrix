@@ -1,10 +1,7 @@
 package com.thanhdang.approvalmatrix.ui.base
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 
@@ -14,10 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 
-
 abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     protected abstract fun getViewBinding(layoutInflater: LayoutInflater): VB
-
 
     protected abstract fun initArguments()
     protected abstract fun setup()
@@ -27,8 +22,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     protected abstract fun initActions()
 
     lateinit var binding: VB
-    open fun setApplyWindow(){
-        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    open fun setApplyWindow() {
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
         ViewCompat.setOnApplyWindowInsetsListener(
             binding.root
         ) { v: View, insets: WindowInsetsCompat ->
@@ -38,6 +36,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
             insets
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)

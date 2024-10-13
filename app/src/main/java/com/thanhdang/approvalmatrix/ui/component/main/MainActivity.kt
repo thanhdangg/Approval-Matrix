@@ -2,23 +2,14 @@ package com.thanhdang.approvalmatrix.ui.component.main
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
-import android.view.WindowInsets
-import android.view.WindowInsetsController
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.thanhdang.approvalmatrix.R
 import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
 import com.thanhdang.approvalmatrix.databinding.ActivityMainBinding
 import com.thanhdang.approvalmatrix.helper.database.AppDatabase
 import com.thanhdang.approvalmatrix.ui.base.BaseActivity
-import com.thanhdang.approvalmatrix.ui.component.create_matrix.ActivityCreateMatrix
+import com.thanhdang.approvalmatrix.ui.component.create_matrix.CreateMatrixActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -70,7 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
         }
 
         binding.btnCreateMatrix.setOnClickListener {
-            val intent = Intent(this, ActivityCreateMatrix::class.java)
+            val intent = Intent(this, CreateMatrixActivity::class.java)
             startActivity(intent)
         }
     }
@@ -79,6 +70,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
         adapter = MatrixAdapter(matrixList, this)
         binding.recyclerView.adapter = adapter
     }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun filterMatrixList() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -96,7 +88,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
         }
     }
 
-
     private fun fetchAllDataFromDatabase() {
         CoroutineScope(Dispatchers.IO).launch {
             val matrixList = database.matrixDao().getAllMatrix()
@@ -107,18 +98,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
             }
         }
     }
+
     override fun onItemClick(matrix: ApprovalMatrix) {
-        val intent = Intent(this, ActivityCreateMatrix::class.java).apply {
+        val intent = Intent(this, CreateMatrixActivity::class.java).apply {
             putExtra("matrix", matrix)
         }
         startActivity(intent)
     }
+
     override fun onResume() {
         super.onResume()
         if (isDefaultFiltered || isTransferFiltered) {
             filterMatrixList()
         }
-//        filterMatrixList()
     }
 
 }

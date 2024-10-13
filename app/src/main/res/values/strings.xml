@@ -43,6 +43,9 @@
     <string name="empty_number_of_approval">Number of approval is required</string>
     <string name="error_min_greater_than_max">Minimum must be less than Maximum</string>
     <string name="error_max_less_than_min">Maximum must be greater than Minimum</string>
+    <string name="ic_back">ic_back</string>
+    <string name="input_minimum_value">Input minimum value</string>
+    <string name="input_maximum_value">Input maximum value</string>
 
 </resources>
 

@@ -13,7 +13,7 @@ data class ApprovalMatrix(
     val minimumApproval: Long = 0,
     val maximumApproval: Long = 0,
     val numberOfApproval: Int = 0
-) : Parcelable{
+) : Parcelable {
     constructor(parcel: android.os.Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,

@@ -25,10 +25,6 @@ class MatrixAdapter(
             itemClickListener.onItemClick(matrix)
         }
     }
-    fun updateList(newList: List<ApprovalMatrix>) {
-        matrixList = newList
-        notifyDataSetChanged()
-    }
 
     override fun getItemCount(): Int = matrixList.size
 
@@ -39,12 +35,27 @@ class MatrixAdapter(
             val tvNumApproval = itemView.findViewById<TextView>(R.id.tvNumApproval)
             val tvMatrixName = itemView.findViewById<TextView>(R.id.tv_approval_1)
             val tvType = itemView.findViewById<TextView>(R.id.tv_approval_2)
+            val layoutApprover1 = itemView.findViewById<View>(R.id.layout_approver_1)
+            val layoutApprover2 = itemView.findViewById<View>(R.id.layout_approver_2)
 
             tvApprovalMin.text = matrix.minimumApproval.toString()
             tvApprovalMax.text = matrix.maximumApproval.toString()
             tvNumApproval.text = matrix.numberOfApproval.toString()
             tvMatrixName.text = matrix.matrixName
             tvType.text = matrix.matrixType
+            when (matrix.numberOfApproval) {
+                1 -> {
+                    layoutApprover1.visibility = View.VISIBLE
+                }
+                2 -> {
+                    layoutApprover1.visibility = View.VISIBLE
+                    layoutApprover2.visibility = View.VISIBLE
+                }
+                else -> {
+                    layoutApprover1.visibility = View.GONE
+                    layoutApprover2.visibility = View.GONE
+                }
+            }
         }
     }
 }
