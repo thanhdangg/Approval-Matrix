@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
-import com.thanhdang.approvalmatrix.helper.database.Dao.MatrixDao
+import com.thanhdang.approvalmatrix.helper.database.dao.MatrixDao
 
 @Database(entities = [ApprovalMatrix::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

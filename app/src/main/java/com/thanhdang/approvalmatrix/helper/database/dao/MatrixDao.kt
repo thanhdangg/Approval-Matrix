@@ -1,4 +1,4 @@
-package com.thanhdang.approvalmatrix.helper.database.Dao
+package com.thanhdang.approvalmatrix.helper.database.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -21,6 +21,4 @@ interface MatrixDao {
     @Delete
     suspend fun delete(matrix: ApprovalMatrix)
 
-    @Query("SELECT * FROM ApprovalMatrix WHERE matrixType = :type")
-    suspend fun getMatrixByType(type: String): List<ApprovalMatrix>
 }
