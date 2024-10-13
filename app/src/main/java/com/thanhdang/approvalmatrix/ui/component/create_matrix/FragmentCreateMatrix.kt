@@ -1,41 +1,47 @@
 package com.thanhdang.approvalmatrix.ui.component.create_matrix
 
-import android.annotation.SuppressLint
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import com.thanhdang.approvalmatrix.R
 import com.thanhdang.approvalmatrix.data.local.ApprovalMatrix
-import com.thanhdang.approvalmatrix.databinding.ActivityCreateMatrixBinding
+import com.thanhdang.approvalmatrix.databinding.FragmentCreateMatrixBinding
 import com.thanhdang.approvalmatrix.helper.database.AppDatabase
-import com.thanhdang.approvalmatrix.ui.base.BaseActivity
+import com.thanhdang.approvalmatrix.ui.base.BaseFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
+class FragmentCreateMatrix : BaseFragment<FragmentCreateMatrixBinding>() {
 
     private lateinit var database: AppDatabase
     private var matrix: ApprovalMatrix? = null
     private var popupWindow: PopupWindow? = null
 
-    override fun getViewBinding(layoutInflater: LayoutInflater): ActivityCreateMatrixBinding {
-        return ActivityCreateMatrixBinding.inflate(layoutInflater)
+    override fun getBindingInflater(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        attachToParent: Boolean
+    ): FragmentCreateMatrixBinding {
+        return FragmentCreateMatrixBinding.inflate(inflater, container, attachToParent)
     }
 
-    override fun initArguments() {
-        database = AppDatabase.getInstance(this)
-        matrix = intent.getParcelableExtra("matrix")
+
+    override fun initData(bundle: Bundle?) {
+        database = AppDatabase.getInstance(requireContext())
+        matrix = arguments?.getParcelable("matrix")
     }
 
-    override fun setup() {
+    override fun initViews() {
         matrix?.let {
             binding.edName.setText(it.matrixName)
             binding.edMin.setText(it.minimumApproval.toString())
@@ -46,24 +52,18 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             )
             binding.layoutUpdateMatrix.visibility = View.VISIBLE
             binding.layoutCreateMatrix.visibility = View.GONE
+            binding.tvTitle.text = getString(R.string.update_matrix)
         }
-    }
-
-    override fun initViews() {
         setFocusChangeListener(binding.edName)
         setFocusChangeListener(binding.edMin)
         setFocusChangeListener(binding.edMax)
         setFocusChangeListener(binding.edNumber)
+        setFocusChangeListener(binding.spType)
     }
 
-    override fun initData() {
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
     override fun initActions() {
-        binding.main.setOnClickListener {
-            hideKeyboard(it)
-        }
+
+
         binding.spType.setOnTouchListener { _, _ ->
             val items = resources.getStringArray(R.array.spinner_values).toList()
             showPopupWindow(binding.spType, items)
@@ -76,9 +76,7 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             binding.edNumber.text?.clear()
             binding.spType.setSelection(0)
         }
-        binding.btnBack.setOnClickListener {
-            finish()
-        }
+
         binding.btnSave.setOnClickListener {
             val name = binding.edName.text.toString()
             val min = binding.edMin.text.toString()
@@ -93,6 +91,11 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
                 showToast(getString(R.string.error_empty))
                 return@setOnClickListener
             } else {
+                if (min.toLong() > max.toLong()) {
+                    showToast(getString(R.string.error_min_greater_than_max))
+                    return@setOnClickListener
+                }
+
                 if (matrix == null) {
                     val newMatrix = ApprovalMatrix(
                         matrixName = name,
@@ -113,13 +116,17 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
                     updateDataInDatabase(updatedMatrix)
                 }
                 binding.btnSave.isEnabled = false
-                finish()
+                // back to previous fragment
+                findNavController().navigate(R.id.action_fragmentCreateMatrix_to_fragmentListMatrix)
+
             }
         }
         binding.btnDelete.setOnClickListener {
             matrix?.let {
                 deleteDataFromDatabase(it)
-                finish()
+                // back to previous fragment
+                findNavController().navigate(R.id.action_fragmentCreateMatrix_to_fragmentListMatrix)
+
             }
         }
         binding.btnUpdate.setOnClickListener {
@@ -132,10 +139,16 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             handlingSaveZoneAlert()
             handelForRangeOfApproval()
 
+
             if (name.isEmpty() || min.isEmpty() || max.isEmpty() || numApproval.isEmpty()) {
                 showToast(getString(R.string.error_empty))
                 return@setOnClickListener
             } else {
+                if (min.toLong() >= max.toLong()) {
+                    showToast(getString(R.string.error_min_greater_than_max))
+                    return@setOnClickListener
+                }
+
                 val updatedMatrix = matrix!!.copy(
                     matrixName = name,
                     matrixType = type,
@@ -144,20 +157,21 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
                     numberOfApproval = numApproval.toInt()
                 )
                 updateDataInDatabase(updatedMatrix)
-                finish()
+                // back to previous fragment
+                findNavController().navigate(R.id.action_fragmentCreateMatrix_to_fragmentListMatrix)
+
             }
         }
     }
-
     private fun showPopupWindow(anchorView: View, items: List<String>) {
         if (popupWindow != null && popupWindow!!.isShowing) {
             popupWindow!!.dismiss()
         }
 
-        val inflater = LayoutInflater.from(this)
+        val inflater = LayoutInflater.from(requireContext())
         val popupView = inflater.inflate(R.layout.popup_spinner_items, null)
         val listView = popupView.findViewById<ListView>(R.id.listView)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
         listView.adapter = adapter
 
         popupWindow =
@@ -171,43 +185,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             popupWindow!!.dismiss()
         }
     }
-
-    private fun setFocusChangeListener(view: View) {
-        view.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-//                showKeyboard(view)
-                view.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.bg_has_focus))
-            } else {
-                view.setBackgroundDrawable(
-                    ContextCompat.getDrawable(
-                        this,
-                        R.drawable.bg_stroke_border
-                    )
-                )
-            }
-        }
-        if (view.id == binding.edMin.id || view.id == binding.edMax.id) {
-            view.setOnFocusChangeListener { _, hasFocus ->
-                if (!hasFocus) {
-                    handelForRangeOfApproval()
-                    view.setBackgroundDrawable(
-                        ContextCompat.getDrawable(
-                            this,
-                            R.drawable.bg_stroke_border
-                        )
-                    )
-                } else {
-                    view.setBackgroundDrawable(
-                        ContextCompat.getDrawable(
-                            this,
-                            R.drawable.bg_has_focus
-                        )
-                    )
-                }
-            }
-        }
-    }
-
     private fun handelForRangeOfApproval() {
         val minText = binding.edMin.text.toString()
         val maxText = binding.edMax.text.toString()
@@ -223,9 +200,11 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             binding.edMin.hint = getString(R.string.error_min_greater_than_max)
             binding.edMax.hint = getString(R.string.error_max_less_than_min)
             showToast(getString(R.string.error_min_greater_than_max))
+
             binding.btnSave.isEnabled = false
             binding.btnUpdate.isEnabled = false
             return
+
         } else {
             binding.btnSave.isEnabled = true
             binding.btnUpdate.isEnabled = true
@@ -234,7 +213,7 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
 
     private fun handlingSaveZoneAlert() {
         val hintTextColor =
-            ContextCompat.getColorStateList(this, R.color.red)
+            ContextCompat.getColorStateList(requireContext(), R.color.red)
         when {
             binding.edName.text.toString().isEmpty() -> {
                 binding.edName.hint = getString(R.string.empty_matrix_name)
@@ -260,19 +239,44 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             }
         }
     }
-
-    private fun showKeyboard(view: View) {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
-    }
-
-    private fun hideKeyboard(view: View) {
-        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    private fun setFocusChangeListener(view: View) {
+        view.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+//                showKeyboard(view)
+                view.setBackgroundDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.bg_has_focus))
+            } else {
+                view.setBackgroundDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.bg_stroke_border
+                    )
+                )
+            }
+        }
+        if (view.id == binding.edMin.id || view.id == binding.edMax.id) {
+            view.setOnFocusChangeListener { _, hasFocus ->
+                if (!hasFocus) {
+                    handelForRangeOfApproval()
+                    view.setBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.bg_stroke_border
+                        )
+                    )
+                } else {
+                    view.setBackgroundDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.bg_has_focus
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun saveDataToDatabase(matrix: ApprovalMatrix) {
@@ -293,4 +297,5 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             database.matrixDao().delete(matrix)
         }
     }
+
 }

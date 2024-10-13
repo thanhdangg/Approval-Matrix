@@ -5,74 +5,46 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_100"
     android:orientation="vertical"
-    tools:context=".ui.component.main.MainActivity">
+    android:background="@color/primary_100"
+    tools:context=".ui.component.main.ActivityMain"
+    >
 
-    <TextView
-        style="@style/headline_small_r"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_32"
-        android:layout_marginBottom="@dimen/margin_16"
-        android:text="@string/approval_matrix"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
-
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_round_top"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_32"
+        >
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@string/ic_back"
+            android:padding="@dimen/margin_12"
+            android:src="@drawable/ic_back"
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"
+            />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnCreateMatrix"
-            style="@style/body_regular"
+        <TextView
+            style="@style/headline_small_r"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="@dimen/margin_16"
-            android:background="@drawable/bg_button_create"
-            android:drawableStart="@drawable/ic_add"
-            android:drawablePadding="@dimen/margin_8"
-            android:paddingHorizontal="@dimen/margin_16"
-            android:paddingVertical="@dimen/margin_4"
-            android:text="@string/tambah_new_matrix"
-            android:textAllCaps="false"
+            android:layout_gravity="center"
+            android:text="@string/approval_matrix"
             android:textColor="@color/white"
-            android:textStyle="bold">
+            android:textStyle="bold"
+            />
+    </androidx.appcompat.widget.Toolbar>
 
-        </androidx.appcompat.widget.AppCompatButton>
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        app:navGraph="@navigation/nav_graph"
+        app:defaultNavHost="true"
+        />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="@dimen/margin_16"
-            android:background="@color/disable_light"/>
-
-        <com.thanhdang.approvalmatrix.ui.custom.CustomButtonView
-            android:id="@+id/btn_default"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_16"/>
-
-        <com.thanhdang.approvalmatrix.ui.custom.CustomButtonView
-            android:id="@+id/btn_transfer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_8"/>
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/margin_16"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="3"
-            tools:listitem="@layout/item_matrix"/>
-    </LinearLayout>
 </LinearLayout>
