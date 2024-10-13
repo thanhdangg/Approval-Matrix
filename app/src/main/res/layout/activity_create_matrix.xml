@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/margin_8"
-                android:background="@drawable/bg_stroke_border"
+                android:background="@drawable/bg_sprinner"
                 android:entries="@array/spinner_values"
                 android:hint="@string/default_"
                 android:paddingVertical="@dimen/margin_16"
