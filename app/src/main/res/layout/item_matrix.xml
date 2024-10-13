@@ -2,109 +2,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_rounder_border"
-    android:padding="@dimen/margin_16"
-    android:orientation="vertical"
     android:layout_marginVertical="@dimen/margin_4"
-    >
+    android:background="@drawable/bg_rounder_border"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_16">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
+
         <TextView
+            style="@style/body_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/range_limit_of_approval"
-            style="@style/body_regular">
-        </TextView>
+            android:text="@string/range_limit_of_approval"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginStart="@dimen/margin_32"
-            >
+            android:orientation="vertical">
 
             <TextView
                 style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/minimum_idr"
-                android:textColor="@color/blue_90"
                 android:layout_marginBottom="@dimen/margin_8"
-                >
+                android:text="@string/minimum_idr"
+                android:textColor="@color/blue_90">
 
             </TextView>
 
             <TextView
+                style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/maximum_idr"
-                android:textColor="@color/blue_90"
-                style="@style/body_regular">
-            </TextView>
+                android:textColor="@color/blue_90"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:gravity="end"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvApprovalMin"
+                style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_8"
                 android:text="@string/_50000"
                 android:textAlignment="textEnd"
-                style="@style/body_regular"
-                android:textColor="@color/blue_90"
-                android:layout_marginBottom="@dimen/margin_8"
-                >
-            </TextView>
+                android:textColor="@color/blue_90"/>
 
             <TextView
                 android:id="@+id/tvApprovalMax"
+                style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_100000"
-                android:textColor="@color/blue_90"
-                style="@style/body_regular">
-            </TextView>
+                android:textColor="@color/blue_90"/>
         </LinearLayout>
     </LinearLayout>
-
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="@dimen/margin_8"
-        android:background="@color/disable"/>
+        android:background="@color/disable" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <TextView
             style="@style/body_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/number_of_approval">
-        </TextView>
+            android:text="@string/number_of_approval"/>
 
         <TextView
             android:id="@+id/tvNumApproval"
+            style="@style/body_regular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/_1"
-            style="@style/body_regular"
             android:gravity="end"
-            android:textColor="@color/blue_90"
-            >
-        </TextView>
+            android:text="@string/_1"
+            android:textColor="@color/blue_90"/>
 
     </LinearLayout>
 
@@ -112,47 +100,40 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginVertical="@dimen/margin_8"
-        android:background="@color/disable"/>
+        android:background="@color/disable" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/layout_approver_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <TextView
                 style="@style/body_regular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/approver_1"
                 android:layout_marginBottom="@dimen/margin_8"
                 android:layout_weight="1"
-                >
+                android:text="@string/approver_1">
 
             </TextView>
 
             <TextView
                 android:id="@+id/tv_approval_1"
+                style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_50000"
-                android:textAlignment="textEnd"
-                style="@style/body_regular"
-                android:textColor="@color/blue_90"
                 android:layout_marginBottom="@dimen/margin_8"
                 android:maxLines="2"
-                >
-            </TextView>
-
-
+                android:text="@string/_50000"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blue_90"/>
         </LinearLayout>
 
         <LinearLayout
@@ -160,29 +141,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <TextView
+                style="@style/body_regular"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/approver_2"
-                style="@style/body_regular"
                 android:layout_weight="1"
-                >
-            </TextView>
-
+                android:text="@string/approver_2"/>
 
             <TextView
                 android:id="@+id/tv_approval_2"
+                style="@style/body_regular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_100000"
-                android:textColor="@color/blue_90"
-                style="@style/body_regular"
                 android:maxLines="2"
+                android:text="@string/_100000"
                 android:textAlignment="textEnd"
-                >
-            </TextView>
+                android:textColor="@color/blue_90"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
