@@ -11,26 +11,39 @@ This project is an Android Kotlin application for managing approval matrices. It
 | When create Approval Matrix        | Show error when min > max         | When update Approval Matrix        |
 | ![](screenshots/Screenshot_4.png)  | ![](screenshots/Screenshot_5.png) | ![](screenshots/Screenshot_6.png)  |
 
+## Demo
+- Video demo in [here](https://www.youtube.com/watch?v=tstMm-d1N6s)
+
 ## ✈️ Features
 - Create new approval matrices
 - Update existing approval matrices
 - Delete approval matrices
 - Filter matrices by type (Default, Transfer Online)
 - View all matrices in a RecyclerView
+- Navigate between different fragments
+
 
 ## 🪄 Technologies Used
 - Kotlin
-- Android SDK
-- Android Jetpack (ViewBinding, Room, etc.)
-- Coroutine for background operations
+- Android Jetpack (ViewModel, LiveData, Navigation)
+- Room Database
+- Coroutines
+- Data Binding
 
 ## ⚙️ Project Structure
-- ui/component/main/MainActivity.kt: Main screen displaying the list of approval matrices.
-- ui/component/create_matrix/CreateMatrixActivity.kt: Screen for creating and updating approval matrices.
-- data/local/ApprovalMatrix.kt: Data class representing an approval matrix.
-- helper/database/AppDatabase.kt: Room database setup for storing approval matrices.
+- `app/src/main/java/com/thanhdang/approvalmatrix/ui/component/main/ActivityMain.kt`: Main activity that hosts the navigation component.
+- `app/src/main/java/com/thanhdang/approvalmatrix/ui/component/main/FragmentListMatrix.kt`: Fragment to list all approval matrices.
+- `app/src/main/java/com/thanhdang/approvalmatrix/ui/component/create_matrix/FragmentCreateMatrix.kt`: Fragment to create or update an approval matrix.
+- `app/src/main/res/layout/`: Contains all the XML layout files.
+- `app/src/main/AndroidManifest.xml`: Manifest file for the application.
 
 ## 🛠️ Setup and Installation
+
+### Prerequisites
+- Android Studio
+- Kotlin 1.5+
+- Gradle 7.0+
+
 ### 1. Clone the repository:
 To install this project, clone the repository and build it using your preferred Kotlin-compatible build tool.
 
@@ -77,6 +90,13 @@ I welcome contributions! Please follow these steps to contribute:
 
 ## ⚓ License
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+## 💡 Acknowledgements
+
+- [Android Jetpack](https://developer.android.com/jetpack)
+- [Kotlin](https://kotlinlang.org/)
+- [Room Database](https://developer.android.com/training/data-storage/room)
+- [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 
 ## 📞Contact
 For any inquiries or issues, please contact [me](https://github.com/thanhdangg) on GitHub.
