@@ -26,7 +26,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
     private var matrix: ApprovalMatrix? = null
     private var popupWindow: PopupWindow? = null
 
-
     override fun getViewBinding(layoutInflater: LayoutInflater): ActivityCreateMatrixBinding {
         return ActivityCreateMatrixBinding.inflate(layoutInflater)
     }
@@ -34,7 +33,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
     override fun initArguments() {
         database = AppDatabase.getInstance(this)
         matrix = intent.getParcelableExtra("matrix")
-
     }
 
     override fun setup() {
@@ -46,7 +44,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             binding.spType.setSelection(
                 resources.getStringArray(R.array.spinner_values).indexOf(it.matrixType)
             )
-
             binding.layoutUpdateMatrix.visibility = View.VISIBLE
             binding.layoutCreateMatrix.visibility = View.GONE
         }
@@ -72,7 +69,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
             showPopupWindow(binding.spType, items)
             true
         }
-
         binding.btnReset.setOnClickListener {
             binding.edName.text?.clear()
             binding.edMin.text?.clear()
@@ -83,7 +79,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
         binding.btnBack.setOnClickListener {
             finish()
         }
-
         binding.btnSave.setOnClickListener {
             val name = binding.edName.text.toString()
             val min = binding.edMin.text.toString()
@@ -162,7 +157,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
         val inflater = LayoutInflater.from(this)
         val popupView = inflater.inflate(R.layout.popup_spinner_items, null)
         val listView = popupView.findViewById<ListView>(R.id.listView)
-
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         listView.adapter = adapter
 
@@ -265,7 +259,6 @@ class CreateMatrixActivity : BaseActivity<ActivityCreateMatrixBinding>() {
                 binding.btnSave.isEnabled = true
             }
         }
-
     }
 
     private fun showKeyboard(view: View) {

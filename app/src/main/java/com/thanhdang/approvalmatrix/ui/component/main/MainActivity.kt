@@ -57,7 +57,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
             filterMatrixList()
             binding.btnTransfer.setColor(isTransferFiltered)
             Log.d("MainActivity", "Transfer Filtered: $isTransferFiltered")
-
         }
 
         binding.btnCreateMatrix.setOnClickListener {
@@ -65,6 +64,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), OnItemClickListener {
             startActivity(intent)
         }
     }
+
     private fun setupRecyclerView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MatrixAdapter(matrixList, this)

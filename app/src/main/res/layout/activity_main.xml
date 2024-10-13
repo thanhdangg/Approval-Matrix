@@ -5,23 +5,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.component.main.MainActivity"
     android:background="@color/primary_100"
     android:orientation="vertical"
-    >
+    tools:context=".ui.component.main.MainActivity">
 
     <TextView
+        style="@style/headline_small_r"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/approval_matrix"
-        style="@style/headline_small_r"
-        android:textColor="@color/white"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_32"
-        android:textStyle="bold"
-        >
-    </TextView>
+        android:layout_marginBottom="@dimen/margin_16"
+        android:text="@string/approval_matrix"
+        android:textColor="@color/white"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,16 +49,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_margin="@dimen/margin_16"
-            android:background="@color/disable_light">
-        </View>
+            android:background="@color/disable_light"/>
 
         <com.thanhdang.approvalmatrix.ui.custom.CustomButtonView
             android:id="@+id/btn_default"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_16"
-            >
-        </com.thanhdang.approvalmatrix.ui.custom.CustomButtonView>
+            android:layout_marginHorizontal="@dimen/margin_16"/>
 
         <com.thanhdang.approvalmatrix.ui.custom.CustomButtonView
             android:id="@+id/btn_transfer"
@@ -69,9 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16"
             android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_8"
-            >
-        </com.thanhdang.approvalmatrix.ui.custom.CustomButtonView>
+            android:layout_marginBottom="@dimen/margin_8"/>
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -81,12 +73,6 @@
             android:layout_marginHorizontal="@dimen/margin_16"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="3"
-            tools:listitem="@layout/item_matrix"
-            >
-        </androidx.recyclerview.widget.RecyclerView>
-
-
+            tools:listitem="@layout/item_matrix"/>
     </LinearLayout>
-
-
 </LinearLayout>
