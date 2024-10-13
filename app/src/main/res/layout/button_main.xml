@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_button_main_uncheck"
+        android:gravity="center"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="@dimen/margin_24"
+        >
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/default_"
+            android:textSize="@dimen/text_size_main"
+            android:textColor="@android:color/black"
+            android:gravity="start"
+            android:paddingStart="@dimen/margin_16"
+            tools:ignore="RtlSymmetry" />
+
+
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/default_middle"
+            />
+
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/default_"
+            android:textColor="@android:color/black"
+            android:gravity="start"
+            android:textSize="@dimen/text_size_main"
+            android:paddingStart="@dimen/margin_16"
+            tools:ignore="RtlSymmetry"/>
+
+        <ToggleButton
+            android:id="@+id/toggle"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_toggle_selector"
+            android:layout_marginEnd="@dimen/margin_16"
+            android:textOn=""
+            android:textOff=""
+            />
+</LinearLayout>

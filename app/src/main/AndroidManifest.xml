@@ -13,7 +13,14 @@
         android:theme="@style/Theme.ApprovalMatrix"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.component.create_matrix.CreateMatrixActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ApprovalMatrix"
+            android:windowSoftInputMode="adjustResize"
+            />
+
+        <activity
+            android:name=".ui.component.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

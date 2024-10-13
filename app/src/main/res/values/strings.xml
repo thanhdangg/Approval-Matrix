@@ -1,3 +1,51 @@
 <resources>
     <string name="app_name">Approval Matrix</string>
+    <string name="tap_exit">Tap again to exit</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="approval_matrix">Approval Matrix</string>
+    <string name="tambah_new_matrix">Tambah New Matrix</string>
+    <string name="default_">Default</string>
+    <string name="range_limit_of_approval">Range Limit of Approval</string>
+    <string name="minimum_idr">Minimum IDR</string>
+    <string name="maximum_idr">Maximum IDR</string>
+    <string name="_50000">50000</string>
+    <string name="_100000">100000</string>
+    <string name="number_of_approval">Number of Approval</string>
+    <string name="approver_1">Approver 1</string>
+    <string name="approver_2">Approver 2</string>
+    <string name="_1">1</string>
+    <string name="create_new_approval_matrix">Create New Approval Matrix</string>
+    <string name="approval_matrix_alias">Approval Matrix Alias</string>
+    <string name="input_matrix_name">Input Matrix Name</string>
+    <string name="future">Future</string>
+    <string name="range_of_approval_minimum">Range of Approval (Minimum)</string>
+    <string name="input_text_here">Input text here</string>
+    <string name="range_of_approval_maximum">Range of Approval (Maximum)</string>
+    <string name="input_number">Input Number</string>
+    <string name="add_to_list">Add to list</string>
+    <string name="reset">reset</string>
+    <string name="update">Update</string>
+    <string name="error_empty">Some empty value</string>
+    <string name="success">Add Matrix success</string>
+    <string name="error">Add Matrix faild</string>
+    <string name="delete">Delete</string>
+    <string name="empty_matrix_name">Matrix name is required</string>
+    <string name="empty_min">Minimum value is required</string>
+    <string name="empty_max">Maximum value is required</string>
+    <string name="empty_number_of_approval">Number of approval is required</string>
+    <string name="error_min_greater_than_max">Minimum must be less than Maximum</string>
+    <string name="error_max_less_than_min">Maximum must be greater than Minimum</string>
+    <string name="ic_back">ic_back</string>
+    <string name="input_minimum_value">Input minimum value</string>
+    <string name="input_maximum_value">Input maximum value</string>
+
 </resources>
+

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_rounder_border"
+    android:padding="@dimen/margin_16"
+    android:orientation="vertical"
+    android:layout_marginVertical="@dimen/margin_4"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/range_limit_of_approval"
+            style="@style/body_regular">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/margin_32"
+            >
+
+            <TextView
+                style="@style/body_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minimum_idr"
+                android:textColor="@color/blue_90"
+                android:layout_marginBottom="@dimen/margin_8"
+                >
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maximum_idr"
+                android:textColor="@color/blue_90"
+                style="@style/body_regular">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            >
+            <TextView
+                android:id="@+id/tvApprovalMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_50000"
+                android:textAlignment="textEnd"
+                style="@style/body_regular"
+                android:textColor="@color/blue_90"
+                android:layout_marginBottom="@dimen/margin_8"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvApprovalMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_100000"
+                android:textColor="@color/blue_90"
+                style="@style/body_regular">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="@dimen/margin_8"
+        android:background="@color/disable"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/body_regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/number_of_approval">
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvNumApproval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_1"
+            style="@style/body_regular"
+            android:gravity="end"
+            android:textColor="@color/blue_90"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginVertical="@dimen/margin_8"
+        android:background="@color/disable"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_approver_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <TextView
+                style="@style/body_regular"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/approver_1"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_weight="1"
+                >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_approval_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_50000"
+                android:textAlignment="textEnd"
+                style="@style/body_regular"
+                android:textColor="@color/blue_90"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:maxLines="2"
+                >
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_approver_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/approver_2"
+                style="@style/body_regular"
+                android:layout_weight="1"
+                >
+            </TextView>
+
+
+            <TextView
+                android:id="@+id/tv_approval_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/_100000"
+                android:textColor="@color/blue_90"
+                style="@style/body_regular"
+                android:maxLines="2"
+                android:textAlignment="textEnd"
+                >
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

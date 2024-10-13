@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.component.create_matrix.CreateMatrixActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary_100"
+        android:paddingTop="@dimen/margin_16">
+
+        <ImageView
+            android:id="@+id/btn_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="@dimen/margin_8"
+            android:contentDescription="@string/ic_back"
+            android:padding="@dimen/margin_12"
+            android:src="@drawable/ic_back"/>
+
+        <TextView
+            style="@style/headline_small_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/approval_matrix"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/margin_16">
+
+            <TextView
+                style="@style/headline_small_r"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:gravity="center"
+                android:text="@string/create_new_approval_matrix"
+                android:textColor="@color/primary_100"
+                android:textStyle="bold"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:background="@color/divider_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/approval_matrix_alias"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@drawable/bg_stroke_border"
+                android:hint="@string/input_matrix_name"
+                android:inputType="text"
+                android:padding="@dimen/margin_16"
+                android:textSize="@dimen/text_size_main" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/future"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@drawable/bg_sprinner"
+                android:entries="@array/spinner_values"
+                android:hint="@string/default_"
+                android:paddingVertical="@dimen/margin_16"
+                android:paddingStart="@dimen/margin_8"
+                android:popupBackground="@color/white"
+                android:textSize="@dimen/text_size_main"
+                tools:ignore="RtlSymmetry" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@color/divider_light" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_of_approval_minimum"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edMin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@drawable/bg_stroke_border"
+                android:hint="@string/input_minimum_value"
+                android:inputType="number"
+                android:padding="@dimen/margin_16"
+                android:textSize="@dimen/text_size_main" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/range_of_approval_maximum" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edMax"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@drawable/bg_stroke_border"
+                android:hint="@string/input_maximum_value"
+                android:inputType="number"
+                android:padding="@dimen/margin_16"
+                android:textSize="@dimen/text_size_main" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_approval" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_8"
+                android:background="@drawable/bg_stroke_border"
+                android:hint="@string/input_number"
+                android:inputType="number"
+                android:padding="@dimen/margin_16"
+                android:textSize="@dimen/text_size_main" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:id="@+id/layout_create_matrix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="@dimen/margin_32"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_stroke_border"
+                    android:text="@string/add_to_list"
+                    android:textColor="@color/disable_middle" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:background="@drawable/bg_stroke_border"
+                    android:text="@string/reset"
+                    android:textColor="@color/primary_100" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_update_matrix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_32"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_stroke_border"
+                    android:text="@string/update"
+                    android:textColor="@color/primary_100" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:background="@drawable/bg_stroke_border"
+                    android:text="@string/delete"
+                    android:textColor="@color/primary_100" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
